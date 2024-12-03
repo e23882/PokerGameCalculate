@@ -1,40 +1,50 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using MahAppBase.Command;
-using MahAppBase.CustomerUserControl;
 
 namespace MahAppBase.ViewModel
 {
     public class MainComponent:ViewModelBase
     {
 		#region Declarations
-		private int _Game1Count;
-		private int _Game2Count;
-		private int _Game3Count;
-		private int _Game4Count;
-		private int _Game5Count;
-		private int _Game6Count;
-		private int _Game7Count;
-		private int _Game8Count;
-		private int _Game9Count;
-		private int _Game10Count;
-		private int _Game11Count;
-		private int _Game12Count;
-		private int _Game13Count;
-		private int _Game14Count;
-		private int _Game15Count;
-		private double _CurrentPercent;
+		private int _TargetCount = 0;
+		private int _Game1Count = 0;
+		private int _Game2Count = 0;
+		private int _Game3Count = 0;
+		private int _Game4Count = 0;
+		private int _Game5Count = 0;
+		private int _Game6Count = 0;
+		private int _Game7Count = 0;
+		private int _Game8Count = 0;
+		private int _Game9Count = 0;
+		private int _Game10Count = 0;
+		private int _Game11Count = 0;
+		private int _Game12Count = 0;
+		private int _Game13Count = 0;
+		private int _Game14Count = 0;
+		private int _Game15Count = 0;
+		private double _CurrentPercent = 0.0;
 
-		ucDonate donate = new ucDonate();
 		#endregion
 
 		#region Property
-		private int _TargetCount = 0;
+
+		/// <summary>
+		/// 非目標牌數量
+		/// </summary>
+		public int NonTargetCards { get; set; }
+
+		/// <summary>
+		/// 目標牌數量
+		/// </summary>
+		public int TargetCards { get; set; } = 8;
+		/// <summary>
+		/// 總共剩餘牌數
+		/// </summary>
+		public int TotalCards { get; set; } = 15;
+
+		/// <summary>
+		/// 自己有的目標牌數量
+		/// </summary>
 		public int TargetCount
 		{
 			get
@@ -44,14 +54,18 @@ namespace MahAppBase.ViewModel
 			set
 			{
 				_TargetCount = value;
-				CalculatePercent();
+				// 目標牌數(所有牌-自己有的)
+				TargetCards -= TargetCount;
+				// 非目標牌數
+				NonTargetCards = TotalCards - TargetCards;
 				OnPropertyChanged();
 			}
 		}
-		public NoParameterCommand ButtonDonateClick { get; set; }
-        public bool DonateIsOpen { get; set; }
-
+		public NoParameterCommand ResetCommand { get; set; }
 		
+		/// <summary>
+		/// 第一局出牌數
+		/// </summary>
 		public int Game1Count
 		{
 			get
@@ -222,8 +236,6 @@ namespace MahAppBase.ViewModel
 				OnPropertyChanged();
 			}
 		}
-		
-
 		public int Game14Count
 		{
 			get
@@ -251,6 +263,9 @@ namespace MahAppBase.ViewModel
 			}
 		}
 
+		/// <summary>
+		/// 目前出牌都是目標牌的機率
+		/// </summary>
 		public double CurrentPercent
 		{
 			get
@@ -269,33 +284,50 @@ namespace MahAppBase.ViewModel
 		public MainComponent()
         {
 			CurrentPercent = (double)1 / 20;
+			InitCommand();
 		}
 
-		public void CalculatePercent() 
+		public void InitCommand() 
 		{
-			CurrentPercent = (double)(20 - TargetCount) / 20;
+			ResetCommand = new NoParameterCommand(ResetCommandAction);
 		}
 
+		private void ResetCommandAction()
+		{
+			TargetCards = 0;
+			NonTargetCards = 0;
+			Game1Count = 0;
+			Game2Count = 0;
+			Game3Count = 0;
+			Game4Count = 0;
+			Game5Count = 0;
+			Game6Count = 0;
+			Game7Count = 0;
+			Game8Count = 0;
+			Game9Count = 0;
+			Game10Count = 0;
+			Game11Count = 0;
+			Game12Count = 0;
+			Game13Count = 0;
+			Game14Count = 0;
+			Game15Count = 0;
+		}
 
-		int totalCards = 15; // 總共剩餘牌數
-		
+		/// <summary>
+		/// 計算目前出牌可能的機率
+		/// </summary>
+		/// <param name="Count">目前的人出牌數</param>
 		public void Calculate(int Count) 
 		{
-			// 目標牌數(所有牌-自己有的)
-			int targetCards = 8 - TargetCount;
-			// 非目標牌數
-			int nonTargetCards = totalCards - targetCards;
-			// 目前的人出牌數
-			int drawCount = Count; 
-
+			TotalCards -= 3;
 			// 計算各種情況的機率
-			for (int k = 0; k <= drawCount; k++)
+			for (int k = 0; k <= Count; k++)
 			{
-				if (k > targetCards || (drawCount - k) > nonTargetCards)
+				if (k > TargetCards || (Count - k) > NonTargetCards)
 					continue; // 若超出可能範圍，跳過計算
 
-				double probability = (double)(Combination(targetCards, k) * Combination(nonTargetCards, drawCount - k))
-									  / Combination(totalCards, drawCount);
+				double probability = (double)(Combination(TargetCards, k) * Combination(NonTargetCards, Count - k))
+									  / Combination(TotalCards, Count);
 				CurrentPercent = probability;
 			}
 		}
@@ -312,12 +344,6 @@ namespace MahAppBase.ViewModel
 			}
 			return result;
 		}
-
-		private void Donate_Closed(object sender, EventArgs e)
-        {
-            DonateIsOpen = false;
-        }
-
         #endregion
     }
 }

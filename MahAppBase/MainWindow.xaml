@@ -4,9 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns:viewModel="clr-namespace:MahAppBase.ViewModel"
-        xmlns:local="clr-namespace:MahAppBase"
-        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Title="" Height="550" Width="500">
     <Grid>
@@ -102,8 +99,9 @@
                         <TextBlock Text="你有幾張" VerticalAlignment="Center" Margin="5,0,0,0"/>
                         <TextBox Text="{Binding TargetCount}" Width="150" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
                         <TextBlock Text="目前機率" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                        <TextBox Text="{Binding CurrentPercent, UpdateSourceTrigger=PropertyChanged}" Width="150" Margin="0,20,0,0" Height="150" FontSize="50"
+                        <TextBox Text="{Binding CurrentPercent, UpdateSourceTrigger=PropertyChanged}" Width="180" Margin="0,20,0,0" Height="150" FontSize="50"
                                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <Button Content="Reset" Command="{Binding ResetCommand}"/>
                     </StackPanel>
                 </Grid>
             </controls:MetroTabItem>
