@@ -298,10 +298,16 @@ namespace MahAppBase.ViewModel
 		public LineSeries data { get; set; }
 		public MainComponent()
         {
+			Init();
+		}
+
+		
+
+		public void Init() 
+		{
 			CurrentPercent = (double)1 / 20;
 			InitCommand();
 			InitChartData();
-			
 		}
 
 		private void InitChartData()
@@ -334,6 +340,7 @@ namespace MahAppBase.ViewModel
 
 		private void ResetCommandAction()
 		{
+			TargetCount = 0;
 			data.Values.Clear();
 			TargetCards = 0;
 			NonTargetCards = 0;
@@ -374,8 +381,16 @@ namespace MahAppBase.ViewModel
 
 					double probability = (double)(Combination(TargetCards, k) * Combination(NonTargetCards, Count - k))
 										  / Combination(TotalCards, Count);
-					CurrentPercent = probability;
-					data.Values.Add(probability);
+					if (probability > 1) 
+					{
+						CurrentPercent = 1.0;
+						data.Values.Add(1.0);
+					}
+					else 
+					{
+						CurrentPercent = probability;
+						data.Values.Add(probability);
+					}
 				}
 			}
 			catch(Exception ex) 
@@ -397,7 +412,5 @@ namespace MahAppBase.ViewModel
 			return result;
 		}
 		#endregion
-
-		
 	}
 }
