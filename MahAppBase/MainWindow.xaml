@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="" Height="550" Width="500">
     <Grid>
@@ -32,77 +33,92 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
                         <TextBlock Text="第1局出牌數" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                        <TextBox Text="{Binding Game1Count}" Width="150" Margin="12,0,0,0" VerticalContentAlignment="Center"/>
+                        <TextBox Text="{Binding Game1Count}" Width="50" Margin="12,0,0,0" VerticalContentAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
                         <TextBlock Text="第2局出牌數" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                        <TextBox Text="{Binding Game2Count}" Width="150" Margin="12,0,0,0" VerticalContentAlignment="Center"/>
+                        <TextBox Text="{Binding Game2Count}" Width="50" Margin="12,0,0,0" VerticalContentAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0">
                         <TextBlock Text="第3局出牌數" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                        <TextBox Text="{Binding Game3Count}" Width="150" Margin="12,0,0,0" VerticalContentAlignment="Center"/>
+                        <TextBox Text="{Binding Game3Count}" Width="50" Margin="12,0,0,0" VerticalContentAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
                         <TextBlock Text="第4局出牌數" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                        <TextBox Text="{Binding Game4Count}" Width="150" Margin="12,0,0,0" VerticalContentAlignment="Center"/>
+                        <TextBox Text="{Binding Game4Count}" Width="50" Margin="12,0,0,0" VerticalContentAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0">
                         <TextBlock Text="第5局出牌數" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                        <TextBox Text="{Binding Game5Count}" Width="150" Margin="12,0,0,0" VerticalContentAlignment="Center"/>
+                        <TextBox Text="{Binding Game5Count}" Width="50" Margin="12,0,0,0" VerticalContentAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0">
                         <TextBlock Text="第6局出牌數" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                        <TextBox Text="{Binding Game6Count}" Width="150" Margin="12,0,0,0" VerticalContentAlignment="Center"/>
+                        <TextBox Text="{Binding Game6Count}" Width="50" Margin="12,0,0,0" VerticalContentAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="0">
                         <TextBlock Text="第7局出牌數" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                        <TextBox Text="{Binding Game7Count}" Width="150" Margin="12,0,0,0" VerticalContentAlignment="Center"/>
+                        <TextBox Text="{Binding Game7Count}" Width="50" Margin="12,0,0,0" VerticalContentAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="0">
                         <TextBlock Text="第8局出牌數" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                        <TextBox Text="{Binding Game8Count}" Width="150" Margin="12,0,0,0" VerticalContentAlignment="Center"/>
+                        <TextBox Text="{Binding Game8Count}" Width="50" Margin="12,0,0,0" VerticalContentAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="8" Grid.Column="0">
                         <TextBlock Text="第9局出牌數" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                        <TextBox Text="{Binding Game9Count}" Width="150" Margin="12,0,0,0" VerticalContentAlignment="Center"/>
+                        <TextBox Text="{Binding Game9Count}" Width="50" Margin="12,0,0,0" VerticalContentAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="9" Grid.Column="0">
                         <TextBlock Text="第10局出牌數" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                        <TextBox Text="{Binding Game10Count}" Width="150" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
+                        <TextBox Text="{Binding Game10Count}" Width="50" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="10" Grid.Column="0">
                         <TextBlock Text="第11局出牌數" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                        <TextBox Text="{Binding Game11Count}" Width="150" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
+                        <TextBox Text="{Binding Game11Count}" Width="50" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="11" Grid.Column="0">
                         <TextBlock Text="第12局出牌數" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                        <TextBox Text="{Binding Game12Count}" Width="150" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
+                        <TextBox Text="{Binding Game12Count}" Width="50" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="12" Grid.Column="0">
                         <TextBlock Text="第13局出牌數" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                        <TextBox Text="{Binding Game13Count}" Width="150" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
+                        <TextBox Text="{Binding Game13Count}" Width="50" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="13" Grid.Column="0">
                         <TextBlock Text="第14局出牌數" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                        <TextBox Text="{Binding Game14Count}" Width="150" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
+                        <TextBox Text="{Binding Game14Count}" Width="50" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Grid.Row="14" Grid.Column="0">
                         <TextBlock Text="第15局出牌數" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                        <TextBox Text="{Binding Game15Count}" Width="150" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
+                        <TextBox Text="{Binding Game15Count}" Width="50" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
                     </StackPanel>
-                    <StackPanel Grid.Row="0" Grid.RowSpan="15" Grid.Column="1" HorizontalAlignment="Left">
-                        <TextBlock Text="你有幾張" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                        <TextBox Text="{Binding TargetCount}" Width="150" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
-                        <TextBlock Text="目前機率" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                        <TextBox Text="{Binding CurrentPercent, UpdateSourceTrigger=PropertyChanged}" Width="180" Margin="0,20,0,0" Height="150" FontSize="50"
-                                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                        <Button Content="Reset" Command="{Binding ResetCommand}"/>
-                    </StackPanel>
+                    <Grid Grid.Row="0" Grid.RowSpan="15" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="你有幾張" VerticalAlignment="Center" Grid.Row="0"/>
+                        <TextBox Text="{Binding TargetCount}" Width="150" VerticalContentAlignment="Center" Grid.Row="1" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                        <TextBlock Text="目前機率" VerticalAlignment="Center" Grid.Row="2" Margin="0,15,0,0"/>
+                        <TextBox Text="{Binding CurrentPercent, UpdateSourceTrigger=PropertyChanged}" Width="180" Margin="0,5,0,0" Height="150" FontSize="50"
+                                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="3"/>
+                        <Button Content="Reset" Command="{Binding ResetCommand}" Grid.Row="4"/>
+                    </Grid>
+                    <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" Grid.Row="9" Grid.RowSpan="15" Grid.Column="1">
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:Axis Title="Time" Labels="{Binding Labels}" />
+                        </lvc:CartesianChart.AxisX>
+                        <lvc:CartesianChart.AxisY>
+                            <lvc:Axis Title="%" />
+                        </lvc:CartesianChart.AxisY>
+                    </lvc:CartesianChart>
                 </Grid>
             </controls:MetroTabItem>
         </controls:MetroAnimatedTabControl>

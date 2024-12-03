@@ -1,4 +1,6 @@
 ﻿using System;
+using LiveCharts;
+using LiveCharts.Wpf;
 using MahAppBase.Command;
 
 namespace MahAppBase.ViewModel
@@ -27,6 +29,15 @@ namespace MahAppBase.ViewModel
 		#endregion
 
 		#region Property
+		/// <summary>
+		/// chart data
+		/// </summary>
+		public SeriesCollection SeriesCollection { get; set; }
+		
+		/// <summary>
+		/// chart label
+		/// </summary>
+		public string[] Labels { get; set; }
 
 		/// <summary>
 		/// 非目標牌數量
@@ -53,12 +64,15 @@ namespace MahAppBase.ViewModel
 			}
 			set
 			{
-				_TargetCount = value;
-				// 目標牌數(所有牌-自己有的)
-				TargetCards -= TargetCount;
-				// 非目標牌數
-				NonTargetCards = TotalCards - TargetCards;
-				OnPropertyChanged();
+				if(value != 0) 
+				{
+					_TargetCount = value;
+					// 目標牌數(所有牌-自己有的)
+					TargetCards -= TargetCount;
+					// 非目標牌數
+					NonTargetCards = TotalCards - TargetCards;
+					OnPropertyChanged();
+				}
 			}
 		}
 		public NoParameterCommand ResetCommand { get; set; }
@@ -281,10 +295,36 @@ namespace MahAppBase.ViewModel
 		#endregion
 
 		#region MemberFunction
+		public LineSeries data { get; set; }
 		public MainComponent()
         {
 			CurrentPercent = (double)1 / 20;
 			InitCommand();
+			InitChartData();
+			
+		}
+
+		private void InitChartData()
+		{
+			try 
+			{
+				data = new LineSeries
+				{
+					Title = "Percentage",
+					Values = new ChartValues<double> { 1, 5, 7, 3, 2 }
+				};
+				SeriesCollection = new SeriesCollection
+				{
+					data
+				};
+
+				Labels = new[] { "G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9", "G10", "G11", "G12", "G13", "G14", "G15" };
+				data.Values.Clear();
+			}
+			catch(Exception ex) 
+			{
+
+			}
 		}
 
 		public void InitCommand() 
@@ -294,6 +334,7 @@ namespace MahAppBase.ViewModel
 
 		private void ResetCommandAction()
 		{
+			data.Values.Clear();
 			TargetCards = 0;
 			NonTargetCards = 0;
 			Game1Count = 0;
@@ -319,17 +360,28 @@ namespace MahAppBase.ViewModel
 		/// <param name="Count">目前的人出牌數</param>
 		public void Calculate(int Count) 
 		{
-			TotalCards -= 3;
-			// 計算各種情況的機率
-			for (int k = 0; k <= Count; k++)
-			{
-				if (k > TargetCards || (Count - k) > NonTargetCards)
-					continue; // 若超出可能範圍，跳過計算
+			if (Count == 0)
+				return;
 
-				double probability = (double)(Combination(TargetCards, k) * Combination(NonTargetCards, Count - k))
-									  / Combination(TotalCards, Count);
-				CurrentPercent = probability;
+			try 
+			{
+				TotalCards -= 3;
+				// 計算各種情況的機率
+				for (int k = 0; k <= Count; k++)
+				{
+					if (k > TargetCards || (Count - k) > NonTargetCards)
+						continue; // 若超出可能範圍，跳過計算
+
+					double probability = (double)(Combination(TargetCards, k) * Combination(NonTargetCards, Count - k))
+										  / Combination(TotalCards, Count);
+					CurrentPercent = probability;
+					data.Values.Add(probability);
+				}
 			}
+			catch(Exception ex) 
+			{
+			}
+			
 		}
 
 		static long Combination(int n, int r)
@@ -344,6 +396,8 @@ namespace MahAppBase.ViewModel
 			}
 			return result;
 		}
-        #endregion
-    }
+		#endregion
+
+		
+	}
 }
